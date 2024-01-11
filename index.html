@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch data</title>
+    
+    <script>
+        // cnt=0
+        // setInterval(()=>
+        // {
+        //     document.getElementById("counter").innerHTML=cnt++
+        // },1000)
+        // 1000ms i.e. after 1 sec counter will increase
+
+        function getData()
+        {
+            url=`https://reqres.in/api/users?page=1`
+            fetch(url)
+            .then(res =>res.json())
+            .then(result =>
+            {
+                console.log(result)
+                console.log(result[`data`])
+                console.table(result[`data`])
+                // retrive single data
+                console.log(result[`data`][0][`email`])
+                
+                output=''
+
+                for(let i=0;i<=4;i++){
+                    output +=`<tr>
+                <td>${result[`data`][i][`id`]}</td>
+                <td>${result[`data`][i][`email`]}</td>
+                <td>${result[`data`][i][`first_name`]}</td>
+                <td>${result[`data`][i][`last_name`]}</td>
+                <td><img src="${result[`data`][i][`avatar`]}"></td>
+            </tr>`
+                }
+            
+                document.getElementById("records").innerHTML=output
+            })
+        }
+
+    </script>
+</head>
+<body align="center">
+    <h1>Nandini Tumane</h1>
+    <h3 id="counter">
+        Counter
+    </h3>
+    <button onclick="getData()">GetData
+    </button>
+    <br><hr>
+    <table border="3" align="center" padding="20px">
+        <thead> <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>First_name</th>
+            <th>Last_name</th>
+            <th>Avatar</th>
+        </tr></thead>
+        <tbody id="records">
+            <tr>
+                <td>id</td>
+                <td>email</td>
+                <td>first_name</td>
+                <td>last_name</td>
+                <td>avatar</td>
+            </tr>
+        </tbody>
+    </table><hr>
+    <div id="result"></div>
+</body>
+</html>
